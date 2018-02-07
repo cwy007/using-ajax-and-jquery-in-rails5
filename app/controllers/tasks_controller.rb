@@ -14,6 +14,13 @@ class TasksController < ApplicationController
     redirect_to tasks_url
   end
 
+  def update
+    @task = Task.find(params[:id])
+    @task.update_attributes!(allowed_params)
+
+    redirect_to tasks_url
+  end
+
   def destroy
     @task = Task.destroy(params[:id])
 
@@ -22,7 +29,7 @@ class TasksController < ApplicationController
 
   private
 
-    def method
+    def allowed_params
       params.require(:task).permit(:name, :complete)
     end
 end
